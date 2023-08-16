@@ -1,0 +1,67 @@
+[
+    {
+        "model": "rareapi.post",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "category": 1,
+            "title": "First Post",
+            "publication_date": "2020-06-01",
+            "image_url": "https://www.thenews-messenger.com/gcdn/presto/2019/02/13/PFRE/36e21033-197a-4ede-8de3-c36f9d9c6e3a-Myers_1.JPG?width=660&height=441&fit=crop&format=pjpg&auto=webp",
+            "content": "This is the first post",
+            "approved": True
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 2,
+        "fields": {
+            "user": 1,
+            "category": 1,
+            "title": "Daniel Myers, mmmhhh, he's so cute",
+            "publication_date": "2020-05-01",
+            "image_url": "https://media.vogue.fr/photos/5c3618b2093f3f72befae9d6/2:3/w_2560%2Cc_limit/mood_gosling_8365.jpeg?lang=eng",
+            "content": "I know it sounds wrong, but i just want to own this man...",
+            "approved": True
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "category": 1,
+            "title": "How my doctor visit went",
+            "publication_date": "2020-04-01",
+            "image_url": "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/2/19/1424347528245/e4454b85-de8d-4061-afbc-c6edf9a69562-1020x765.jpeg?width=700&quality=85&auto=format&fit=max&s=fa8665027fa630b7b2c48c47e64be53c",
+            "content": "A wee bit invasive",
+            "approved": True
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 4,
+        "fields": {
+            "user": 1,
+            "category": 1,
+            "title": "How my dog died",
+            "publication_date": "2020-03-01",
+            "image_url": "https://blog-pawsafe.b-cdn.net/wp-content/uploads/where-do-dogs-go-after-they-die.png",
+            "content": "Little pepe was hit by a very big bus",
+            "approved": True
+        }
+    },
+    {
+        "model": "rareapi.post",
+        "pk": 5,
+        "fields": {
+            "user": 1,
+            "category": 1,
+            "title": "Sharkz attackz",
+            "publication_date": "2020-02-01",
+            "image_url": "https://i.ytimg.com/vi/hwuBic8RvnE/maxresdefault.jpg",
+            "content": "Shark attackz are bad",
+            "approved": True
+        }
+    }
+]

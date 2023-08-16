@@ -9,4 +9,4 @@ class Comment(models.Model):
         "RareUser", on_delete=models.CASCADE, related_name="Rare_User_Comments"
     )
     content = models.CharField(max_length=400000001)
-    created_on = models.DateField(auto_now_add=False)
+    created_on = models.DateField(auto_now=True, auto_now_add=True)
