@@ -1,0 +1,18 @@
+[
+    {
+        "model": "rare.category",
+        "pk": 1,
+        "fields": {
+            "label": "Health"
+        }
+    },
+    {
+        
+    }
+]
+
+
+
+class Category(models.Model):
+    
+    label = models.CharField(max_length=653975)
