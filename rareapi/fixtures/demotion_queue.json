@@ -1,0 +1,29 @@
+[
+    {
+        "model": "rareapi.demotion_queue",
+        "pk": 1,
+        "fields": {
+            "action": "Deleting the user for being bawdy",
+            "admin": 1,
+            "approver_one": 3
+        }
+    },
+    {
+        "model": "rareapi.demotion_queue",
+        "pk": 2,
+        "fields": {
+            "action": "Deleting the user for being really bawdy",
+            "admin": 2,
+            "approver_one": 1
+        }
+    },
+    {
+        "model": "rareapi.demotion_queue",
+        "pk": 3,
+        "fields": {
+            "action": "Deleting the user for being really, really, really bawdy",
+            "admin": 3,
+            "approver_one": 2
+        }
+    }
+]

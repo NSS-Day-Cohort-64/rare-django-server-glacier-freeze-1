@@ -1,0 +1,72 @@
+[
+    {
+        "model": "rareapi.tag",
+        "pk": 1,
+        "fields": {
+            "label": "Daniel"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 2,
+        "fields": {
+            "label": "Sportz"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 3,
+        "fields": {
+            "label": "Barbie"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 4,
+        "fields": {
+            "label": "Bacon"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 5,
+        "fields": {
+            "label": "LifeStyle"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 6,
+        "fields": {
+            "label": "Dink & Dunk"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 7,
+        "fields": {
+            "label": "Shama-lama-ding-dong"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 8,
+        "fields": {
+            "label": "People, Places, Things"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 9,
+        "fields": {
+            "label": "Who the heck is Dustin?"
+        }
+    },
+    {
+        "model": "rareapi.tag",
+        "pk": 10,
+        "fields": {
+            "label": "Egg"
+        }
+    }
+]

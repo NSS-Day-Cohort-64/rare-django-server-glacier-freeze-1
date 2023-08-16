@@ -1,0 +1,50 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "first_name": "Jonathan",
+            "last_name": "VanDuyne",
+            "email": "jonathanislame@aol.com",
+            "username": "jonathanIsLame",
+            "password": "password",
+            "is_staff": true
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "first_name": "Cassie",
+            "last_name": "Revell",
+            "email": "cassie@catz.com",
+            "username": "cassieCatz",
+            "password": "password",
+            "is_staff": true
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "first_name": "Chesney",
+            "last_name": "Hardin",
+            "email": "chesney@farmersmeet.com",
+            "username": "kennyluvschesney",
+            "password": "password",
+            "is_staff": false
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 4,
+        "fields": {
+            "first_name": "Daniel",
+            "last_name": "Myers",
+            "email": "danielmyers@queue.com",
+            "username": "danieldemotionqueue",
+            "password": "password",
+            "is_staff": false
+        }
+    }
+]

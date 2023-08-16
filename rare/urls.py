@@ -15,8 +15,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
+# from rareapi.views import register_user, login_user
+from rareapi.views import CategoryView, CommentView, DemotionQueueView, PostView, RareUserView, PostReactionView, PostTagView, ReactionView, SubscriptionView, TagView
+
+
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'categories', CategoryView, 'category')
+router.register(r'comments', CommentView, 'comment')
+router.register(r'posts', PostView, 'post')
+router.register(r'demotionqueues', DemotionQueueView, 'demotionqueue')
+router.register(r'users', RareUserView, 'user')
+router.register(r'reactions', ReactionView, 'reaction')
+router.register(r'subscriptions', SubscriptionView, 'subscription')
+router.register(r'tags', TagView, 'tag')
+router.register(r'posttags', PostTagView, 'posttag')
+router.register(r'postreactions', PostReactionView, 'postreaction')
+
 
 urlpatterns = [
+    path('', include(router.urls)),
+    # path('register', register_user),
+    # path('login', login_user),
     path('admin/', admin.site.urls),
 ]
