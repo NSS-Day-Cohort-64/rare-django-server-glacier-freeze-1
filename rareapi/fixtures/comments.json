@@ -54,7 +54,7 @@
         "pk": 6,
         "fields": {
             "post": 5,
-            "author": 5,
+            "author": 4,
             "content": "Maybe you need the right brain circuits.” If, however, future experiments parallel the latest studies and confirm that an innate sense of rhythm does not depend on neural circuits unique to vocal learners, then how does the brain follow a beat?",
             "created_on": "2010-02-07"
         }
@@ -64,7 +64,7 @@
         "pk": 7,
         "fields": {
             "post": 5,
-            "author": 5,
+            "author": 4,
             "content": "I am lame cause I'm Josh and my eye looked really wonky during picture day.",
             "created_on": "2023-08-12"
         }

@@ -3,7 +3,7 @@ rm -rf ./rareapi/migrations
 python3 manage.py migrate
 python3 manage.py makemigrations rareapi
 python3 manage.py migrate rareapi
-python3 manage.py loaddata tokens
+
 python3 manage.py loaddata users
 python3 manage.py loaddata rare_users
 python3 manage.py loaddata categories
