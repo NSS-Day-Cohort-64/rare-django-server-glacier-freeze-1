@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class RareUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
     bio = models.CharField(max_length=55)
-    profile_image_url = models.CharField(max_length=400)
-    created_on = models.DateField(auto_now=True, auto_now_add=True)
+    profile_image_url = models.CharField(max_length=14000)
+    created_on = models.DateField(auto_now_add=True)
     active = models.BigIntegerField(default=True)
 
     @property

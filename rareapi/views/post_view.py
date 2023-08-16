@@ -6,7 +6,6 @@ from rest_framework import serializers, status
 from rareapi.models import Post, RareUser, Category
 
 
-
 class PostView(ViewSet):
 
     def retrieve(self, request, pk):
@@ -15,27 +14,32 @@ class PostView(ViewSet):
         return Response(serializer.data)
 
     def list(self, request):
-        posts = []
-        if "approved" in request.query_params:
-            approved_post = request.query_params['approved'] 
-        
+        Posts = Post.objects.order_by('publication_date')
+        serializer = PostSerializer(Posts, many=True)
+        return Response(serializer.data)
+
+      
+
+
+        """
+           posts = [] if "approved" in request.query_params:
+            approved_post = request.query_params['approved']
+
             if request.auth.user.is_staff:
                 posts = Post.objects.order_by('publication_date')
             else:
-                posts = Post.objects.filter(rare_user=request.auth.user and approved_post == True).order_by('publication_date')
-        else: 
+                posts = Post.objects.filter(
+                rare_user=request.auth.user and approved_post == True).order_by('publication_date')
+        else:
             posts = Post.objects.order_by('publication_date')
+            """
 
 
-            
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
-    
     def destroy(self, request, pk):
         post = Post.objects.get(pk=pk)
         post.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
-   
+
     def create(self, request):
         """Handle POST operations """
         user = RareUser.objects.get(pk=request.data["user"])
@@ -44,8 +48,7 @@ class PostView(ViewSet):
         post = Post.objects.create(
             user=user,
             category=category,
-            title= request.data["title"],
-            publication_date=request.data["publication_date"],
+            title=request.data["title"],
             image_url=request.data["image_url"],
             content=request.data["content"],
             approved=request.data["approved"]
@@ -57,11 +60,14 @@ class PostView(ViewSet):
         serializer = PostSerializer(post)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 class RareUserSerializer(serializers.ModelSerializer):
-  
+
     class Meta:
         model = RareUser
-        fields = ('id', 'user', 'bio', 'profile_image_url', 'created_on', 'active')
+        fields = ('id', 'user', 'bio', 'profile_image_url',
+                  'created_on', 'active')
+
 
 class CategorySerializer(serializers.ModelSerializer):
     """JSON serializer for categories"""
@@ -71,11 +77,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    
+
     category = CategorySerializer(many=False)
     user = RareUserSerializer(many=False)
+
     class Meta:
         model = Post
-        fields = ('id', 'user', 'category', 'title', 'publication_date', 'image_url', 'content', 'approved')
-
-
+        fields = ('id', 'user', 'category', 'title',
+                  'publication_date', 'image_url', 'content', 'approved')

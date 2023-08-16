@@ -1,72 +1,72 @@
 [
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 1,
         "fields": {
             "post": 1,
             "author": 1,
             "content": "39 percent of drivers older than 65 have smartphones compared just 23 percent in 2011. ",
-            "created_on": "2019-07-27 00:00:00"
+            "created_on": "2019-07-27"
         }
     },
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 2,
         "fields": {
             "post": 1,
             "author": 1,
             "content": "Tom has a temper.",
-            "created_on": "2020-07-27 00:00:00"
+            "created_on": "2020-07-27"
         }
     },
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 3,
         "fields": {
             "post": 2,
             "author": 2,
             "content": "He also directed the HBO film Behind the Candelabra and helped produce the Edward Snowden documentary Citizenfour for HBO Films.",
-            "created_on": "2010-02-27 00:00:00"
+            "created_on": "2010-02-27"
         }
     },
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 4,
         "fields": {
             "post": 3,
             "author": 3,
             "content": "On a routine visit to one of Egypt's quarries—which are run on the labor of Jewish slaves—he meets the elders of the Hebrews, who eventually reveal his Jewish heritage.",
-            "created_on": "2015-02-27 00:00:00"
+            "created_on": "2015-02-27"
         }
     },
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 5,
         "fields": {
             "post": 4,
             "author": 4,
             "content": "The first is the role of nuts, which forms a large part of the Adventist diet in Loma Linda.",
-            "created_on": "2022-02-17 00:00:00"
+            "created_on": "2022-02-17"
         }
     },
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 6,
         "fields": {
             "post": 5,
             "author": 5,
             "content": "Maybe you need the right brain circuits.” If, however, future experiments parallel the latest studies and confirm that an innate sense of rhythm does not depend on neural circuits unique to vocal learners, then how does the brain follow a beat?",
-            "created_on": "2010-02-07 00:00:00"
+            "created_on": "2010-02-07"
         }
     },
     {
-        "model": "rare.comment",
+        "model": "rareapi.comment",
         "pk": 7,
         "fields": {
             "post": 5,
             "author": 5,
             "content": "I am lame cause I'm Josh and my eye looked really wonky during picture day.",
-            "created_on": "2023-08-12 00:00:00"
+            "created_on": "2023-08-12"
         }
     }
 ]
