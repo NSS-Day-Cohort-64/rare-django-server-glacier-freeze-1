@@ -13,6 +13,11 @@ class CategoryView(ViewSet):
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK) 
     
+    def retrieve(self, request, pk):
+        category = Category.objects.get(pk=pk)
+        serializer = CategorySerializer(category)
+        return Response(serializer.data)
+    
     def update(self, request, pk):
         """handles PUT requests for updating a category"""
         category = Category.objects.get(pk=pk)
@@ -20,6 +25,15 @@ class CategoryView(ViewSet):
 
         category.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+    def create(self, request):
+        """Handle POST operations """
+
+        category = Category.objects.create(
+            label= request.data["label"]
+        )
+        serializer = CategorySerializer(category)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def destroy(self, request, pk):
         category = Category.objects.get(pk=pk)

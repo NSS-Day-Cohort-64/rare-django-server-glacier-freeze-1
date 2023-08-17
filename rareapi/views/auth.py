@@ -55,7 +55,12 @@ def register_user(request):
     first_name = request.data.get('first_name', None)
     last_name = request.data.get('last_name', None)
     password = request.data.get('password', None)
-    is_staff= request.data('is_staff',None)
+    is_staff= request.data.get('is_staff',None)
+
+    bio = request.data.get('bio',None)
+    profile_image_url = request.data.get('profile_image_url',None)
+    active = request.data.get('active',None)
+    
 
     if username is not None \
         and email is not None\
