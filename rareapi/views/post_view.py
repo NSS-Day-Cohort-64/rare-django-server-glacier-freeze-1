@@ -14,7 +14,7 @@ class PostView(ViewSet):
         return Response(serializer.data)
 
     def list(self, request):
-        Posts = Post.objects.order_by('publication_date')
+        Posts = Post.objects.order_by('-publication_date')
         serializer = PostSerializer(Posts, many=True)
         return Response(serializer.data)
 
@@ -53,12 +53,23 @@ class PostView(ViewSet):
             content=request.data["content"],
             approved=request.data["approved"]
 
-
-
-
         )
         serializer = PostSerializer(post)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def update(self, request, pk):
+        """handles PUT requests for updating a Comment"""
+        post = Post.objects.get(pk=pk)
+        post.user = RareUser.objects.get(pk=request.data['user'])
+        post.category = Category.objects.get(pk=request.data["category"])
+        post.content = request.data["content"]
+        post.title = request.data["title"]
+        post.publication_date = request.data["publication_date"]
+        post.image_url = request.data["image_url"]
+        post.approved = request.data["approved"]
+
+        post.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 
 class RareUserSerializer(serializers.ModelSerializer):
@@ -66,7 +77,7 @@ class RareUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = RareUser
         fields = ('id', 'user', 'bio', 'profile_image_url',
-                  'created_on', 'active')
+                  'created_on', 'active', 'full_name')
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -84,4 +95,5 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'user', 'category', 'title',
-                  'publication_date', 'image_url', 'content', 'approved')
+                  'publication_date', 'image_url', 'content', 
+                  'approved', 'tags', "comment_posts", "reactions")

@@ -13,12 +13,20 @@ class CommentView(ViewSet):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    def retrieve(self, request, pk):
+        comment = Comment.objects.get(pk=pk)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+    
     def update(self, request, pk):
         """handles PUT requests for updating a Comment"""
-        Comment = Comment.objects.get(pk=pk)
-        Comment.label = request.data['label']
+        comment = Comment.objects.get(pk=pk)
+        post = Post.objects.get(pk=request.data['post'])
+        comment.post= post
+        comment.author = RareUser.objects.get(pk=request.data["author"])
+        comment.content = request.data["content"]
 
-        Comment.save()
+        comment.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
     
     def create(self, request):
