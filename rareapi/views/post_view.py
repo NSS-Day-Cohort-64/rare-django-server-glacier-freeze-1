@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareapi.models import Post, RareUser, Category
+from rareapi.models import Post, RareUser, Category, Tag, Comment, Reaction
 
 
 class PostView(ViewSet):
@@ -86,12 +86,39 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'label')
 
+class TagSerializer(serializers.ModelSerializer):
+  
+        class Meta:
+            model = Tag
+            fields = ('id','label')
+
+class CommentAuthorSerializer(serializers.ModelSerializer):
+    """JSON serializer for author of comment"""
+    class Meta:
+        model = RareUser
+        fields = ('id', 'user', 'bio', 'profile_image_url', 'active', 'full_name')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    """JSON serializer for comments"""
+    author = CommentAuthorSerializer(many=False)
+    class Meta:
+        model = Comment
+        fields = ('id', 'post', 'author', 'content', 'created_on')
+
+class ReactionSerializer(serializers.ModelSerializer):
+  
+    class Meta:
+        model = Reaction
+        fields = ('id', 'label', 'image_url')
 
 class PostSerializer(serializers.ModelSerializer):
 
     category = CategorySerializer(many=False)
     user = RareUserSerializer(many=False)
-
+    tags = TagSerializer(many=True)
+    comment_posts = CommentSerializer(many=True)
+    reactions = ReactionSerializer(many=True)
     class Meta:
         model = Post
         fields = ('id', 'user', 'category', 'title',
