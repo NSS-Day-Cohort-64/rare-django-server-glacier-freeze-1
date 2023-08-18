@@ -29,6 +29,15 @@ class TagView(ViewSet):
         tag = Tag.objects.get(pk=pk)
         tag.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+    def create(self, request):
+        """Handle POST operations """
+
+        tag = Tag.objects.create(
+            label=request.data["label"],
+        )
+        serializer = TagSerializer(tag)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class TagSerializer(serializers.ModelSerializer):
   
