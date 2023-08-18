@@ -16,7 +16,7 @@ class TagView(ViewSet):
         tags = Tag.objects.order_by('label')
         serializer = TagSerializer(tags, many=True)
         return Response(serializer.data)
-    
+
     def update(self, request, pk):
         """handles PUT requests for updating a category"""
         tag = Tag.objects.get(pk=pk)
@@ -24,15 +24,15 @@ class TagView(ViewSet):
 
         tag.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
-    
+
     def destroy(self, request, pk):
         tag = Tag.objects.get(pk=pk)
         tag.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
-class TagSerializer(serializers.ModelSerializer):
-  
-        class Meta:
-            model = Tag
-            fields = ('id', 'label')
 
+class TagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'label')
