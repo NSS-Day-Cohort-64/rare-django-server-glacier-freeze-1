@@ -9,3 +9,4 @@ from .rare_user_view import RareUserView
 from .reaction_view import ReactionView
 from .tag_view import TagView
 from .subscription_view import SubscriptionView
+from .token_view import TokenView
