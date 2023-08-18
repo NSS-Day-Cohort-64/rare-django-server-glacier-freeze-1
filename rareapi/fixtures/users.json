@@ -7,7 +7,7 @@
             "last_name": "VanDuyne",
             "email": "jonathanislame@aol.com",
             "username": "jonathanIsLame",
-            "password": "password",
+            "password": "pbkdf2_sha256$320000$L9WyeeE95squbRZelePsZf$XayBzPujv5CeAnmIzcLL0orBqE3qDpJLuQsy9zOM5rc=",
             "is_staff": true
         }
     },
@@ -19,7 +19,7 @@
             "last_name": "Revell",
             "email": "cassie@catz.com",
             "username": "cassieCatz",
-            "password": "password",
+            "password": "pbkdf2_sha256$320000$L9WyeeE95squbRZelePsZf$XayBzPujv5CeAnmIzcLL0orBqE3qDpJLuQsy9zOM5rc=",
             "is_staff": true
         }
     },
@@ -31,7 +31,7 @@
             "last_name": "Hardin",
             "email": "chesney@farmersmeet.com",
             "username": "kennyluvschesney",
-            "password": "password",
+            "password": "pbkdf2_sha256$320000$L9WyeeE95squbRZelePsZf$XayBzPujv5CeAnmIzcLL0orBqE3qDpJLuQsy9zOM5rc=",
             "is_staff": false
         }
     },
@@ -43,8 +43,23 @@
             "last_name": "Myers",
             "email": "danielmyers@queue.com",
             "username": "danieldemotionqueue",
-            "password": "password",
+            "password": "pbkdf2_sha256$320000$L9WyeeE95squbRZelePsZf$XayBzPujv5CeAnmIzcLL0orBqE3qDpJLuQsy9zOM5rc=",
             "is_staff": false
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$L9WyeeE95squbRZelePsZf$XayBzPujv5CeAnmIzcLL0orBqE3qDpJLuQsy9zOM5rc=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "emily@lemmon.com",
+            "first_name": "Emily",
+            "last_name": "Lemmon",
+            "email": "emily@lemmon.com",
+            "is_staff": true,
+            "is_active": true
         }
     }
 ]
