@@ -19,12 +19,12 @@ def login_user(request):
     Method arguments:
       request -- The full HTTP request object
     '''
-    email = request.data['email']
+    username = request.data['username']
     password = request.data['password']
 
     # Use the built-in authenticate method to verify
     # authenticate returns the user object or None if no user is found
-    authenticated_user = authenticate(username=email, password=password)
+    authenticated_user = authenticate(username=username, password=password)
 
     # If authentication was successful, respond with their token
     if authenticated_user is not None:
@@ -55,19 +55,16 @@ def register_user(request):
     first_name = request.data.get('first_name', None)
     last_name = request.data.get('last_name', None)
     password = request.data.get('password', None)
-    is_staff= request.data.get('is_staff',None)
-
     bio = request.data.get('bio',None)
     profile_image_url = request.data.get('profile_image_url',None)
-    active = request.data.get('active',None)
+
     
 
     if username is not None \
         and email is not None\
         and first_name is not None \
         and last_name is not None \
-        and password is not None \
-        and is_staff is not None:
+        and password is not None:
         if email is None:
             return Response(
                 {'message': 'You must provide an email'},
@@ -87,11 +84,15 @@ def register_user(request):
             return Response(
                 {'message': 'You must provide a password'},
                 status=status.HTTP_400_BAD_REQUEST
-               
             )
-        if is_staff is None: 
+        if bio is None: 
             return Response(
-                {'message': 'You must define yourself as staff or not staff.'},
+                {'message': 'You must include a bio about yourself.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        if profile_image_url is None: 
+            return Response(
+                {'message': 'You must include a profile image.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
@@ -104,14 +105,24 @@ def register_user(request):
                 password=request.data['password'],
                 first_name=request.data['first_name'],
                 last_name=request.data['last_name'],
-                email = request.data['email'],
-                is_staff = request.data['is_staff']
+                email = request.data['email']
             )
+            
+
         except IntegrityError:
             return Response(
                 {'message': 'An account with that email address already exists'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+        if new_user is not None:
+            new_rare_user = RareUser.objects.create(
+                user=new_user,
+                bio=request.data['bio'],
+                profile_image_url=request.data['profile_image_url']
+            )
+            new_rare_user.save()
+            
 
 
         # Use the REST Framework's token generator on the new user account
