@@ -16,6 +16,16 @@ class ReactionView(ViewSet):
         reactions = Reaction.objects.all()
         serializer = ReactionSerializer(reactions, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+        reaction = Reaction()
+        reaction.label = request.data["label"]
+        reaction.image_url = request.data["image_url"]
+
+        reaction.save()
+        serializer = ReactionSerializer(reaction, context={'request': request})
+
+        return Response(serializer.data)
 
 class ReactionSerializer(serializers.ModelSerializer):
   
