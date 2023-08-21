@@ -14,25 +14,18 @@ class PostView(ViewSet):
         return Response(serializer.data)
 
     def list(self, request):
-        Posts = Post.objects.order_by('-publication_date')
-        serializer = PostSerializer(Posts, many=True)
+        posts = Post.objects.filter(user__active=True).order_by('-publication_date')
+        if "approved" in request.query_params and request.query_params['approved'] == 'true':
+            posts = posts.filter(approved = True)
+        elif "approved" in request.query_params and request.query_params['approved'] == 'false':
+            posts = posts.filter(approved = False)
+    
+
+        serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
-      
+    
 
-
-        """
-           posts = [] if "approved" in request.query_params:
-            approved_post = request.query_params['approved']
-
-            if request.auth.user.is_staff:
-                posts = Post.objects.order_by('publication_date')
-            else:
-                posts = Post.objects.filter(
-                rare_user=request.auth.user and approved_post == True).order_by('publication_date')
-        else:
-            posts = Post.objects.order_by('publication_date')
-            """
 
 
     def destroy(self, request, pk):
