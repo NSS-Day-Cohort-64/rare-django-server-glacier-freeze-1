@@ -9,7 +9,11 @@ class CommentView(ViewSet):
 
     def list(self, request):
         """handles GET requests to return a list of comments"""
-        comments = Comment.objects.all()
+        comments = Comment.objects.order_by('-created_on')
+        if "post" in request.query_params:
+            pk= request.query_params['post']
+            comments = comments.filter(post = pk)
+
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
