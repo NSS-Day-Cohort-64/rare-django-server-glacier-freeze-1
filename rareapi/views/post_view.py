@@ -13,45 +13,26 @@ class PostView(ViewSet):
         serializer = PostSerializer(post)
         return Response(serializer.data)
 
-    # def list(self, request):
-    #     posts = Post.objects.filter(user__active=True).order_by('-publication_date')
-    #     if "approved" in request.query_params and request.query_params['approved'] == 'true':
-    #         posts = posts.filter(approved = True)
-    #     elif "approved" in request.query_params and request.query_params['approved'] == 'false':
-    #         posts = posts.filter(approved = False)
-    #     elif "user" in request.query_params:
-    #         pk= request.query_params['user']
-    #         posts = posts.filter(user = pk)
-            
-    #     serializer = PostSerializer(posts, many=True)
-    #     return Response(serializer.data)
-    
     def list(self, request):
-
         posts = Post.objects.filter(user__active=True).order_by('-publication_date')
 
-        if "approved" in request.query_params:
-            approved = request.query_params['approved']
-            if approved == 'true':
-                posts = posts.filter(approved=True)
-            elif approved == 'false':
-                posts = posts.filter(approved=False)
-
-        if "user" in request.query_params:
-            user_id = request.query_params.get('user')
-            posts = posts.filter(user_id=user_id)
+        if "approved" in request.query_params and request.query_params['approved'] == 'true':
+            posts = posts.filter(approved = True)
+        
+        elif "approved" in request.query_params and request.query_params['approved'] == 'false':
+            posts = posts.filter(approved = False)
+            
+        elif "user" in request.query_params:
+            if request.query_params['user'] == "current":
+                # user__user: 1st user from the dunder is accessing the user Post model. 2nd user from the dunder is accessing the user in RareUser model 
+                posts = posts.filter(user__user=request.auth.user)
+            
+            else:
+                pk= request.query_params['user']
+                posts = posts.filter(user = pk)
 
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
-
-
-        #     posts = posts.filter(user=user_id)
-        # elif "user" in request.query_params:
-        #     user_id = request.query_params.get('user')
-        #     user_id = int(user_id)
-            
-        # serializer = PostSerializer(posts, many=True)
-        # return Response(serializer.data)
 
 
     def destroy(self, request, pk):
