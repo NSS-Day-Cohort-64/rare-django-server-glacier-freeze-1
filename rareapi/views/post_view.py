@@ -19,8 +19,11 @@ class PostView(ViewSet):
             posts = posts.filter(approved = True)
         elif "approved" in request.query_params and request.query_params['approved'] == 'false':
             posts = posts.filter(approved = False)
+        elif "user" in request.query_params:
+            pk= request.query_params['user']
+            posts = posts.filter(user = pk)
     
-
+    
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
@@ -62,6 +65,10 @@ class PostView(ViewSet):
         post.approved = request.data["approved"]
 
         post.save()
+        
+        new_tag_array= request.data["tags"]
+        post.tags.set(new_tag_array)
+
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 
