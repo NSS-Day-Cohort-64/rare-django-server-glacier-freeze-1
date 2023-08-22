@@ -13,19 +13,45 @@ class PostView(ViewSet):
         serializer = PostSerializer(post)
         return Response(serializer.data)
 
-    def list(self, request):
-        posts = Post.objects.filter(user__active=True).order_by('-publication_date')
-        if "approved" in request.query_params and request.query_params['approved'] == 'true':
-            posts = posts.filter(approved = True)
-        elif "approved" in request.query_params and request.query_params['approved'] == 'false':
-            posts = posts.filter(approved = False)
+    # def list(self, request):
+    #     posts = Post.objects.filter(user__active=True).order_by('-publication_date')
+    #     if "approved" in request.query_params and request.query_params['approved'] == 'true':
+    #         posts = posts.filter(approved = True)
+    #     elif "approved" in request.query_params and request.query_params['approved'] == 'false':
+    #         posts = posts.filter(approved = False)
+    #     elif "user" in request.query_params:
+    #         pk= request.query_params['user']
+    #         posts = posts.filter(user = pk)
+            
+    #     serializer = PostSerializer(posts, many=True)
+    #     return Response(serializer.data)
     
+    def list(self, request):
+
+        posts = Post.objects.filter(user__active=True).order_by('-publication_date')
+
+        if "approved" in request.query_params:
+            approved = request.query_params['approved']
+            if approved == 'true':
+                posts = posts.filter(approved=True)
+            elif approved == 'false':
+                posts = posts.filter(approved=False)
+
+        if "user" in request.query_params:
+            user_id = request.query_params.get('user')
+            posts = posts.filter(user_id=user_id)
 
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
-    
 
+        #     posts = posts.filter(user=user_id)
+        # elif "user" in request.query_params:
+        #     user_id = request.query_params.get('user')
+        #     user_id = int(user_id)
+            
+        # serializer = PostSerializer(posts, many=True)
+        # return Response(serializer.data)
 
 
     def destroy(self, request, pk):
@@ -35,7 +61,7 @@ class PostView(ViewSet):
 
     def create(self, request):
         """Handle POST operations """
-        user = RareUser.objects.get(pk=request.data["user"])
+        user = RareUser.objects.get(user=request.auth.user)
         category = Category.objects.get(pk=request.data["category"])
 
         post = Post.objects.create(
@@ -89,12 +115,13 @@ class CommentAuthorSerializer(serializers.ModelSerializer):
     """JSON serializer for author of comment"""
     class Meta:
         model = RareUser
-        fields = ('id', 'user', 'bio', 'profile_image_url', 'active', 'full_name')
+        fields = ('id', 'full_name', 'bio', 'profile_image_url', 'active')
 
 
 class CommentSerializer(serializers.ModelSerializer):
     """JSON serializer for comments"""
     author = CommentAuthorSerializer(many=False)
+    
     class Meta:
         model = Comment
         fields = ('id', 'post', 'author', 'content', 'created_on')
@@ -112,6 +139,7 @@ class PostSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
     comment_posts = CommentSerializer(many=True)
     reactions = ReactionSerializer(many=True)
+    
     class Meta:
         model = Post
         fields = ('id', 'user', 'category', 'title',

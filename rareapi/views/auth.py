@@ -2,13 +2,13 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from rest_framework.authtoken.models import Token
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rareapi.models import RareUser
 
 """ I DO NOT KNOW IF YOU NEED THESE IMPORTS! ALSO HONEYRARE WITH ADMIN AUTH IS PASTED BELOW THE GAMER """
-from rest_framework import status
 
 
 @api_view(['POST'])

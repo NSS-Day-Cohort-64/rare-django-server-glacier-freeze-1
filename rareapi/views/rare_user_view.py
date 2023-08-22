@@ -39,6 +39,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RareUserSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False)
+    
     class Meta:
         model = RareUser
         fields = ('id', 'user', 'bio', 'profile_image_url', 'created_on', 'active', 'full_name')
