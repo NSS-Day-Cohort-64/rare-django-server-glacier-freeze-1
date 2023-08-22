@@ -31,7 +31,7 @@ router.register(r'reactions', ReactionView, 'reaction')
 router.register(r'subscriptions', SubscriptionView, 'subscription')
 router.register(r'tags', TagView, 'tag')
 router.register(r'tokens', TokenView, 'token')
-#router.register(r'posttags', PostTagView, 'posttag')
+router.register(r'posttags', PostTagView, 'posttag')
 #router.register(r'postreactions', PostReactionView, 'postreaction')
 
 
