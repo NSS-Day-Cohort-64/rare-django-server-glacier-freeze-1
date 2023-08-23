@@ -69,8 +69,9 @@ class PostView(ViewSet):
 
         post.save()
         
-        new_tag_array= request.data["tags"]
-        post.tags.set(new_tag_array)
+        if "tags" in request.data:
+            new_tag_array= request.data["tags"]
+            post.tags.set(new_tag_array)
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
