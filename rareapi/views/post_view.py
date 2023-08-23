@@ -20,8 +20,11 @@ class PostView(ViewSet):
         elif "approved" in request.query_params and request.query_params['approved'] == 'false':
             posts = posts.filter(approved = False)
         elif "user" in request.query_params:
-            pk= request.query_params['user']
-            posts = posts.filter(user = pk)
+            if request.query_params['user'] == "current":
+                posts = posts.filter(user__user=request.auth.user)
+            else:
+                pk= request.query_params['user']
+                posts = posts.filter(user = pk)
     
     
         serializer = PostSerializer(posts, many=True)
@@ -38,7 +41,7 @@ class PostView(ViewSet):
 
     def create(self, request):
         """Handle POST operations """
-        user = RareUser.objects.get(pk=request.data["user"])
+        user = RareUser.objects.get(user=request.auth.user)
         category = Category.objects.get(pk=request.data["category"])
 
         post = Post.objects.create(
@@ -66,8 +69,9 @@ class PostView(ViewSet):
 
         post.save()
         
-        new_tag_array= request.data["tags"]
-        post.tags.set(new_tag_array)
+        if "tags" in request.data:
+            new_tag_array= request.data["tags"]
+            post.tags.set(new_tag_array)
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
